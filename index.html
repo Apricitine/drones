@@ -2,7 +2,23 @@
 <html>
 
 <head>
-  <title>Processing.JS inside Webpages: Template</title>
+  <link rel="shortcut icon" href="big-blob.png" type="image/x-icon">
+  <title>Drones | Apricitine</title>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      background-color: rgb(18, 18, 18);
+      overflow: hidden;
+    }
+    
+    canvas {
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(172, 213, 166, 0.773);
+    }
+  </style>
 </head>
 
 <body>
@@ -10,8 +26,6 @@
   <canvas id="mycanvas"></canvas>
 </body>
 
-<!-- Include the processing.js library -->
-<!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
 <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
 <script lang="ts">
   var programCode = function (processingInstance) {
@@ -2427,7 +2441,6 @@
           rect(300, 300, 600, 600);
         }
         cursor(cs);
-        println("running");
       }
     }
   };
