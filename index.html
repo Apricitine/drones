@@ -17,6 +17,7 @@
     canvas {
       border-radius: 8px;
       box-shadow: 0px 0px 10px rgba(172, 213, 166, 0.773);
+      outline: none;
     }
   </style>
 </head>
@@ -1437,7 +1438,7 @@
         // Calculate if enemy should make a character
         var i = random(1, 600);
         // if a bunch of conditionals are met
-        if (i > chance) {
+        if (i > chanceForSpawn) {
           // randomly choose what to place (biased towards weaker objects)
           var type = chances[floor(random(chances.length))];
 
@@ -2332,6 +2333,39 @@
       }
       createStarters();
 
+      draw = function() {
+        cs = "default";
+        // run sections of program
+        switch (transition[0] <= 1 ? scene : transition[1]) {
+          case "game":
+            game();
+            break;
+          case "home":
+            home();
+            break;
+          case "how":
+            how();
+            break;
+          case "drones":
+            drones();
+            break;
+          case "won":
+            win();
+            break;
+          case "lost":
+            lose();
+            break;
+        }
+        // Transition between sections
+        if (transition[0] > 0) {
+          transition[0] -= 0.05;
+          var tr = smoothstep(1 - abs(transition[0] - 1));
+          fill(0, 255 * tr);
+          rect(300, 300, 600, 600);
+        }
+        cursor(cs);
+      }
+
       mousePressed = function () {
         switch (scene) {
           case "game":
@@ -2408,40 +2442,6 @@
             break;
         }
       };
-
-      frameRate(30);
-      draw = function () {
-        cs = "default";
-        // run sections of program
-        switch (transition[0] <= 1 ? scene : transition[1]) {
-          case "game":
-            game();
-            break;
-          case "home":
-            home();
-            break;
-          case "how":
-            how();
-            break;
-          case "drones":
-            drones();
-            break;
-          case "won":
-            win();
-            break;
-          case "lost":
-            lose();
-            break;
-        }
-        // Transition between sections
-        if (transition[0] > 0) {
-          transition[0] -= 0.05;
-          var tr = smoothstep(1 - abs(transition[0] - 1));
-          fill(0, 255 * tr);
-          rect(300, 300, 600, 600);
-        }
-        cursor(cs);
-      }
     }
   };
 
